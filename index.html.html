@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>長照守護者：機構照顧實戰大挑戰</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans TC"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b'
+            },
+            medical: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              900: '#0c4a6e'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .custom-shadow {
+      box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.1), 0 8px 10px -6px rgba(5, 150, 105, 0.1);
+    }
+    .badge-glow {
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    }
+    @keyframes pulse-subtle {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    .animate-subtle {
+      animation: pulse-subtle 2.5s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-medical-600 flex items-center justify-center text-white shadow-md">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-lg md:text-xl font-bold tracking-tight text-slate-800 flex items-center gap-1.5">
+            長照守護者 <span class="text-xs bg-emerald-100 text-brand-800 px-2 py-0.5 rounded-full font-medium hidden sm:inline-block">機構照護篇</span>
+          </h1>
+          <p class="text-xs text-slate-500 font-medium">機構式長照法規與實戰專業題庫</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="soundToggleBtn" onclick="toggleSound()" class="p-2.5 rounded-xl border border-slate-200 hover:bg-slate-100 active:scale-95 transition-all text-slate-600 flex items-center gap-1.5 text-xs font-medium" aria-label="切換音效">
+          <span id="soundIcon">🔊</span>
+          <span class="hidden md:inline" id="soundText">音效開啟</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl w-full mx-auto px-4 py-6 md:py-8 flex-grow flex flex-col justify-center">
+
+    <!-- START SCREEN -->
+    <div id="startScreen" class="bg-white rounded-3xl p-6 md:p-10 border border-slate-200/80 custom-shadow text-center">
+      <div class="inline-flex items-center justify-center p-3 bg-brand-50 rounded-2xl mb-4 border border-brand-100">
+        <span class="text-3xl md:text-4xl">🏥</span>
+      </div>
+      <h2 class="text-2xl md:text-3xl font-black text-slate-800 mb-3 tracking-tight">長照守護者：機構照顧實戰大挑戰</h2>
+      <p class="text-slate-600 text-sm md:text-base max-w-xl mx-auto mb-6 leading-relaxed">
+        專為長照、護理、社工與高齡福祉領域學習者設計！<br class="hidden sm:inline">
+        融合<strong>長照服務法、老人福利機構設立標準、管路限制、人力比、選填五步驟與最新住宿補助</strong>之 9 大核心實戰考核。
+      </p>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto mb-8 text-left">
+        <div class="bg-slate-50 border border-slate-200/80 p-3 rounded-2xl">
+          <div class="text-emerald-600 text-sm font-bold flex items-center gap-1">🌱 暖身考驗</div>
+          <div class="text-xs text-slate-500 mt-1">服務型態判準與安養機構</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-200/80 p-3 rounded-2xl">
+          <div class="text-sky-600 text-sm font-bold flex items-center gap-1">⚖️ 核心法規</div>
+          <div class="text-xs text-slate-500 mt-1">管路限制、護理之家與人力比</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-200/80 p-3 rounded-2xl">
+          <div class="text-amber-600 text-sm font-bold flex items-center gap-1">📋 實戰技能</div>
+          <div class="text-xs text-slate-500 mt-1">老盟選機構5步驟與榮家政策</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-200/80 p-3 rounded-2xl">
+          <div class="text-rose-600 text-sm font-bold flex items-center gap-1">🔥 衛政與決策</div>
+          <div class="text-xs text-slate-500 mt-1">12萬住宿補助與三管Boss題</div>
+        </div>
+      </div>
+
+      <button onclick="startGame()" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-600 to-medical-600 hover:from-brand-700 hover:to-medical-700 text-white font-bold rounded-2xl text-lg shadow-lg hover:shadow-xl active:scale-[0.98] transition-all duration-200 animate-subtle">
+        開始專業闖關挑戰 ➔
+      </button>
+    </div>
+
+    <!-- GAMEPLAY SCREEN -->
+    <div id="gameScreen" class="hidden flex-col gap-5">
+      <!-- Dashboard Top -->
+      <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col gap-3">
+        <div class="flex items-center justify-between text-xs md:text-sm font-semibold">
+          <div class="flex items-center gap-2">
+            <span id="levelBadge" class="px-2.5 py-1 rounded-full text-xs font-bold bg-brand-100 text-brand-800">
+              暖身階段
+            </span>
+            <span class="text-slate-400">|</span>
+            <span class="text-slate-600 font-medium">關卡進度：<span id="questionIndexText" class="text-slate-900 font-bold">1</span> / 9</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5 text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200/60">
+              <span>🏆</span>
+              <span class="font-bold font-mono text-sm md:text-base" id="scoreDisplay">0</span>
+              <span class="text-xs text-amber-700 font-normal">分</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+          <div id="progressBar" class="bg-gradient-to-r from-brand-500 to-medical-500 h-2.5 rounded-full transition-all duration-500 ease-out" style="width: 11%;"></div>
+        </div>
+      </div>
+
+      <!-- Question Card -->
+      <div class="bg-white rounded-3xl p-5 md:p-8 border border-slate-200 custom-shadow transition-all relative">
+        <!-- Question Header -->
+        <div class="flex items-start justify-between gap-3 mb-4">
+          <div class="flex flex-col">
+            <span id="topicTag" class="text-xs font-bold text-sky-700 tracking-wider uppercase mb-1">長照服務型態區分</span>
+            <h3 id="questionTitle" class="text-lg md:text-xl font-bold text-slate-800 leading-snug">
+              載入問題中...
+            </h3>
+          </div>
+          <span id="questionIcon" class="text-2xl p-2 rounded-xl bg-slate-50 border border-slate-100 shrink-0">🤔</span>
+        </div>
+
+        <!-- Question Prompt Detail (if any) -->
+        <div id="scenarioBox" class="hidden mb-5 p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl text-xs md:text-sm text-slate-700 leading-relaxed font-normal">
+        </div>
+
+        <!-- Interactive Area: Multiple Choice or Sortable Items -->
+        <div id="optionsContainer" class="grid grid-cols-1 gap-3">
+          <!-- Dynamically Injected Options -->
+        </div>
+
+        <!-- Sortable Controls (Only for Q6) -->
+        <div id="sortControls" class="hidden mt-4 pt-3 border-t border-slate-100 flex flex-wrap gap-2 justify-end">
+          <button onclick="resetSortOrder()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold active:scale-95 transition-all">
+            重置排序
+          </button>
+          <button onclick="submitSortOrder()" class="px-6 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-bold shadow-md active:scale-95 transition-all">
+            確認送出順序 ➔
+          </button>
+        </div>
+
+        <!-- Instant Feedback Box -->
+        <div id="feedbackBox" class="hidden mt-6 p-4 md:p-5 rounded-2xl border transition-all duration-300">
+          <div class="flex items-center gap-2 mb-2 font-bold text-base md:text-lg" id="feedbackTitle">
+            <!-- Correct / Wrong Banner -->
+          </div>
+          <div class="text-xs md:text-sm leading-relaxed text-slate-700 space-y-2" id="feedbackDetail">
+            <!-- Regulatory Explanation -->
+          </div>
+          <div class="mt-4 flex justify-end">
+            <button id="nextBtn" onclick="nextQuestion()" class="px-6 py-2.5 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-sm font-bold shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center gap-1.5">
+              <span>前往下一題</span>
+              <span>➔</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RESULT / REVIEW SCREEN -->
+    <div id="resultScreen" class="hidden bg-white rounded-3xl p-6 md:p-10 border border-slate-200 custom-shadow flex-col items-center text-center">
+      <div id="resultTrophy" class="text-5xl md:text-6xl mb-2">🏅</div>
+      <div id="resultBadge" class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 bg-brand-100 text-brand-800">
+        通關評級
+      </div>
+      <h2 id="resultTitle" class="text-2xl md:text-3xl font-black text-slate-800 mb-2">挑戰完成！</h2>
+      <p id="resultComment" class="text-slate-600 text-sm md:text-base max-w-md mx-auto mb-6">
+        您已順利完成 9 道專業機構式長照實務題庫測試。
+      </p>
+
+      <!-- Score Box Grid -->
+      <div class="grid grid-cols-3 gap-3 w-full max-w-md mb-8">
+        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl">
+          <div class="text-xs text-slate-500 font-medium">總得分</div>
+          <div class="text-xl md:text-2xl font-black text-brand-600 font-mono" id="finalScore">0</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl">
+          <div class="text-xs text-slate-500 font-medium">答對題數</div>
+          <div class="text-xl md:text-2xl font-black text-sky-600 font-mono" id="correctCount">0 / 9</div>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl">
+          <div class="text-xs text-slate-500 font-medium">精確度</div>
+          <div class="text-xl md:text-2xl font-black text-amber-600 font-mono" id="accuracyRate">0%</div>
+        </div>
+      </div>
+
+      <!-- Mistake Review Notebook Accordion -->
+      <div class="w-full text-left mb-8">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="font-bold text-slate-800 text-sm md:text-base flex items-center gap-1.5">
+            <span>📚</span>
+            <span>實務重點與錯題筆記本</span>
+          </h4>
+          <span class="text-xs text-slate-400 font-medium" id="reviewSubtitle">錯題回顧</span>
+        </div>
+        <div id="reviewContainer" class="space-y-3 max-h-72 overflow-y-auto pr-1">
+          <!-- Dynamic Mistake List or All Correct Message -->
+        </div>
+      </div>
+
+      <!-- Restart Button -->
+      <button onclick="restartGame()" class="px-8 py-3.5 bg-gradient-to-r from-brand-600 to-medical-600 hover:from-brand-700 hover:to-medical-700 text-white font-bold rounded-2xl text-base shadow-lg hover:shadow-xl active:scale-95 transition-all">
+        🔄 再次挑戰精進實務技能
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-3">
+    <div class="max-w-4xl mx-auto px-4 text-center text-xs text-slate-400 space-y-1">
+      <p>依據《長期照顧服務法》、《老人福利機構設立標準》、《護理人員法》及衛生福利部公告政策彙編</p>
+      <p>專為教學複習設計 • 免登入單頁純淨架構 • 支援行動裝置觸控與電腦操作</p>
+    </div>
+  </footer>
+
+  <script>
+    /* =========================================================
+       AUDIO SYNTHESIZER (Pure Web Audio API - No external files)
+       ========================================================= */
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('soundIcon');
+      const text = document.getElementById('soundText');
+      if (soundEnabled) {
+        icon.textContent = '🔊';
+        text.textContent = '音效開啟';
+        playBeep(600, 0.08);
+      } else {
+        icon.textContent = '🔇';
+        text.textContent = '音效靜音';
+      }
+    }
+
+    function playBeep(freq = 440, duration = 0.1, type = 'sine') {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {
+        console.warn('Audio not available', e);
+      }
+    }
+
+    function playCorrectSound() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const freqs = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        freqs.forEach((f, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(f, now + idx * 0.08);
+          gain.gain.setValueAtTime(0.18, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 0.25);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.25);
+        });
+      } catch (e) {}
+    }
+
+    function playWrongSound() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.exponentialRampToValueAtTime(110, now + 0.3);
+
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.3);
+      } catch (e) {}
+    }
+
+    function playVictorySound() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const notes = [440, 554.37, 659.25, 880];
+        notes.forEach((f, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(f, now + i * 0.12);
+          gain.gain.setValueAtTime(0.2, now + i * 0.12);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.12 + 0.4);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + i * 0.12);
+          osc.stop(now + i * 0.12 + 0.4);
+        });
+      } catch (e) {}
+    }
+
+    /* =========================================================
+       QUESTION DATASET (9 Questions complying strictly with specs)
+       ========================================================= */
+    const QUESTIONS = [
+      {
+        id: 1,
+        stage: '暖身檢測',
+        stageColor: 'bg-emerald-100 text-emerald-800',
+        topic: '長照服務法第9條 • 服務型態認定',
+        icon: '🏠',
+        title: '依《長期照顧服務法》第9條規定，若某服務單位提供「24小時或夜間住宿照顧」，依法屬於何種長期照顧服務型態？',
+        scenario: '【法規情境】長照服務法第9條將照顧服務分為：居家式、社區式、機構住宿式、家庭照顧者支持服務與其他等類別。如何正確劃分白日托顧與住宿機構？',
+        type: 'single',
+        options: [
+          { text: 'A. 社區式長期照顧服務（如日間照顧中心、團體家屋）', correct: false },
+          { text: 'B. 機構住宿式長期照顧服務（指以固定設施提供24小時或夜間住宿）', correct: true },
+          { text: 'C. 居家式長期照顧服務（到宅提供個別化日常生活協助）', correct: false },
+          { text: 'D. 巷弄長照站（C級喘息及共餐預防失能據點）', correct: false }
+        ],
+        lawBase: '《長期照顧服務法》第9條第3款',
+        explanation: '長照服務法第9條明定：機構住宿式長照服務係指「以設有固定設施，提供或併供日間照顧、24小時或夜間住宿照顧之服務」。日間照顧中心若不提供全日夜宿，則屬於同條第2款之「社區式服務」。'
+      },
+      {
+        id: 2,
+        stage: '暖身檢測',
+        stageColor: 'bg-emerald-100 text-emerald-800',
+        topic: '老人福利機構類別 • 自理型長者',
+        icon: '🧓',
+        title: '72歲王伯伯身體健康、生活完全能夠自理、無任何醫療管路，希望尋找有同儕陪伴、提供伙食及健康促進活動的進住機構，下列哪一機構類型最符合其需求？',
+        scenario: '【評估個案】無失能或失智問題，日常生活活動功能（ADL）正常，僅需獨立生活空間與基本生活事務輔導。',
+        type: 'single',
+        options: [
+          { text: 'A. 養護型機構（收住生活自理能力缺損且無技術性護理需求者）', correct: false },
+          { text: 'B. 安養機構 / 養生村（以日常生活能自理之老人為照顧對象）', correct: true },
+          { text: 'C. 長期照護型機構（收住罹患慢性病需長期醫療照顧者）', correct: false },
+          { text: 'D. 護理之家（收住技術性護理與多管路重度臥床者）', correct: false }
+        ],
+        lawBase: '《老人福利法》第34條與《老人福利機構設立標準》第2條',
+        explanation: '依老人福利機構設立標準：安養機構以「日常生活能自理之老人」為收容對象；而養護型則收住「生活自理能力缺損」之中重度失能長者，兩者收案標準有本質之重大差異。'
+      },
+      {
+        id: 3,
+        stage: '核心法規',
+        stageColor: 'bg-sky-100 text-sky-800',
+        topic: '老人福利機構設立標準 • 管路收案門檻',
+        icon: '🩺',
+        title: '依我國《老人福利機構設立標準》，「養護型機構」針對留置醫療管路之長者，其法規容許之收案門檻與限制為何？',
+        scenario: '【臨床轉介關鍵】臨床實務轉介時，個案若有留置管路（鼻胃管、尿管、氣切管等），社工與出院準備小組必須精準確認機構收治上限。',
+        type: 'single',
+        options: [
+          { text: 'A. 嚴格禁止收留任何留置管路之長者，連鼻胃管亦不得進住', correct: false },
+          { text: 'B. 最多僅得收容留置 2 管（如鼻胃管、導尿管）長者；但氣切管或需呼吸器者依法不符合養護型收案', correct: true },
+          { text: 'C. 只要有聘任專職護理人員，可收容至 3 管（含氣切套管與抽痰需求）之長者', correct: false },
+          { text: 'D. 養護機構管路無限制，由機構主任或特約醫師自行審查決定即可', correct: false }
+        ],
+        lawBase: '《老人福利機構設立標準》第2條第2款',
+        explanation: '養護機構主要照顧生活自理缺損長者，若留置管路以「2管（鼻胃管、尿管）」為上限，且病況須相對穩定；若長者留置氣切管（3管）或需要抽痰、呼吸器等高技術性醫療護理，必須轉向「長期照護型」或「護理之家」。'
+      },
+      {
+        id: 4,
+        stage: '核心法規',
+        stageColor: 'bg-sky-100 text-sky-800',
+        topic: '法規主管與機構設立 • 護理之家權責',
+        icon: '📋',
+        title: '關於「一般護理之家」與「老人福利機構（養護型/長照型）」的法規主管依據與負責人資格，下列敘述何者完全正確？',
+        scenario: '【法制對照】護理機構與老人福利機構分別由不同法令授權及不同主管司署管轄。',
+        type: 'single',
+        options: [
+          { text: 'A. 兩者皆由內政部社會司主管，依《老人福利法》向社會局申請立案', correct: false },
+          { text: 'B. 護理之家由衛生福利部照護司主管，依《護理人員法》設立，其負責人（負責護理師）必須具備規定之臨床實務年資', correct: true },
+          { text: 'C. 護理之家負責人只要具備社工師或長照機構結業證書者皆可擔任負責人', correct: false },
+          { text: 'D. 養護型機構與護理之家的照護評鑑與法規皆直接適用《醫療法》之規範', correct: false }
+        ],
+        lawBase: '《護理人員法》第16條、第19條及衛生福利部法規',
+        explanation: '一般護理之家屬「醫療照護體系之護理機構」，受《護理人員法》規範（主管機關為衛福部照護司/地方衛生局），負責人須為具備7年以上護理臨床經驗之資深護理人員；而養護型機構則屬社會福利機構，主管機關為社會局/衛福部社家署。'
+      },
+      {
+        id: 5,
+        stage: '核心法規',
+        stageColor: 'bg-sky-100 text-sky-800',
+        topic: '人力配置標準 • 失智症照顧型機構',
+        icon: '👥',
+        title: '在老人福利機構設立標準中，專門照顧具行動能力之失智症長者之「失智症照顧型機構」，其「日間照顧服務員」與失智長者的人力配置比規定為何？',
+        scenario: '【人力配置考點】失智症單元照顧強調小組模式、引導與安全看視，人力比相較於一般養護床更為嚴格緊湊。',
+        type: 'single',
+        options: [
+          { text: 'A. 白天 1:3 ；夜間 1:15', correct: true },
+          { text: 'B. 白天 1:8 ；夜間 1:25', correct: false },
+          { text: 'C. 白天 1:15 ；夜間 1:30', correct: false },
+          { text: 'D. 全天維持 1:5 之統一配置', correct: false }
+        ],
+        lawBase: '《老人福利機構設立標準》第4條',
+        explanation: '失智症照顧型機構主要收治中度以上失智且具行動能力之長者，防走失與陪伴引導需求極高，法規嚴格規定：隨時保持至少一人在場，日間（白天）照顧服務員與服務對象比例不得低於 1:3，夜間不得低於 1:15。'
+      },
+      {
+        id: 6,
+        stage: '實戰技能',
+        stageColor: 'bg-amber-100 text-amber-800',
+        topic: '中華民國老人福利推動聯盟 • 挑選機構五步驟',
+        icon: '🔄',
+        title: '【互動排序題】老盟（中華民國老人福利推動聯盟）宣導之「挑選長照機構五步驟」，請按照標準推薦順序由先至後排列：',
+        scenario: '【步驟拖曳/調整】請點擊項目旁邊的「▲上移」或「▼下移」按鈕，調整為 1 至 5 的正規專業決策程序，完成後點擊確認送出。',
+        type: 'sort',
+        correctOrder: [
+          '步驟一：召開家庭共識會議（凝聚意願與費用分攤）',
+          '步驟二：蒐集合法機構名單（政府評鑑優良清單）',
+          '步驟三：依條件初步篩選（距離、預算、照護需求）',
+          '步驟四：進行電話初探諮詢（確認床位、收治限制）',
+          '步驟五：實地走訪參訪查核（觀察長輩神情、氣味與照護氛圍）'
+        ],
+        // Initial shuffled state
+        items: [
+          '步驟四：進行電話初探諮詢（確認床位、收治限制）',
+          '步驟一：召開家庭共識會議（凝聚意願與費用分攤）',
+          '步驟五：實地走訪參訪查核（觀察長輩神情、氣味與照護氛圍）',
+          '步驟三：依條件初步篩選（距離、預算、照護需求）',
+          '步驟二：蒐集合法機構名單（政府評鑑優良清單）'
+        ],
+        lawBase: '老盟（中華民國老人福利推動聯盟）《安心入住機構手冊》',
+        explanation: '正確挑選機構五步驟為：1.家庭會議 ➔ 2.名單蒐集 ➔ 3.條件篩選 ➔ 4.電話初探 ➔ 5.實地參訪。先有家庭與長輩共識，再蒐集政府合法清單，經篩選後致電確認，最後務必親自於用餐或活動時段實地走訪查驗。'
+      },
+      {
+        id: 7,
+        stage: '進階政策',
+        stageColor: 'bg-indigo-100 text-indigo-800',
+        topic: '榮民之家轉型政策 • 醫養合一',
+        icon: '🎖️',
+        title: '國軍退除役官兵輔導委員會（退輔會）轄下之「榮譽國民之家（榮家）」，近年配合國家整體長照政策推動轉型，下列何項政策轉型敘述最為正確？',
+        scenario: '【榮民體系銜接】早期榮家僅供榮民進住，近年配合國家資源共享政策，推動醫養合一與床位釋出。',
+        type: 'single',
+        options: [
+          { text: 'A. 仍恪遵原有法規，僅限具備戰役勳章之第一類榮民進住，絕不對外開放', correct: false },
+          { text: 'B. 推動「醫養合一」政策，除榮民榮眷外，餘裕床位已正式開放一般年滿65歲民眾自費申請進住', correct: true },
+          { text: 'C. 榮家已全數改制為地方政府社會局管轄之公立養老院，取消退輔會體系', correct: false },
+          { text: 'D. 一般民眾進住榮家一律享有退伍軍人之全額免費公費照護優待', correct: false }
+        ],
+        lawBase: '國軍退除役官兵輔導委員會《榮譽國民之家組織準則》及自費安養規定',
+        explanation: '退輔會配合長照整合政策，榮家結合榮民總醫院分院體系落實「醫養合一」，自106年起陸續釋出餘裕床位，正式開放符合條件之一般年滿65歲民眾自費申請進住安養、養護或失智專區。'
+      },
+      {
+        id: 8,
+        stage: '衛政福利',
+        stageColor: 'bg-rose-100 text-rose-800',
+        topic: '衛生福利部 • 住宿式服務機構使用者補助',
+        icon: '💰',
+        title: '為減輕家庭長期機構照顧負擔，衛生福利部自民國112年（2023年）起推行之「住宿式服務機構使用者補助方案」，主要政策突破與最新補助規範為何？',
+        scenario: '【重大長照衛政更新】住宿型機構不在長照2.0四包錢給付範圍內，政府特別以專案現金補助緩解家庭龐大經濟壓力。',
+        type: 'single',
+        options: [
+          { text: 'A. 必須所得稅率在20%以下之家庭，每年一律定額發放新臺幣3萬元', correct: false },
+          { text: 'B. 經評估長照需要等級達 4 級以上或身障證明中度以上，每年每人補助上限提高至 12 萬元整，且取消排富條款', correct: true },
+          { text: 'C. 補助僅適用於入住公立養老院者，入住私立機構或護理之家者完全無法請領', correct: false },
+          { text: 'D. 不論失能程度等級為何，只要戶籍設在台灣即可終身每月領取2萬元直接現金', correct: false }
+        ],
+        lawBase: '衛生福利部《住宿式服務機構使用者補助方案》112年度起最新規範',
+        explanation: '行政院核定衛福部自112年起，入住合法指定住宿機構滿180天，且經評估長照等級達4級以上（或身障中度以上），每人每年最高由6萬元提高至12萬元整，並全面「取消排富規定」，大幅減輕重度失能家庭負荷。'
+      },
+      {
+        id: 9,
+        stage: '終極實務',
+        stageColor: 'bg-purple-100 text-purple-800',
+        topic: 'Boss情境整合題 • 三管長者最適轉介決策',
+        icon: '👑',
+        title: '【Boss整合情境】80歲李爺爺中風臥床，留置鼻胃管、尿管及氣切管（共3管），需要頻繁抽痰與傷口換藥，子女因輪班無法全天照護且家庭經濟面臨壓力。身為照專/專業社工，下列何項處遇決策最完整且合法精準？',
+        scenario: '【個案身分與臨床條件】\n• 評估狀態：重度臥床、失能等級第8級（CMS Level 8）\n• 醫療留置管路：3 管（鼻胃管、導尿管、氣切套管）\n• 經濟需求：家庭迫切需要機構住宿財務支援',
+        type: 'single',
+        options: [
+          {
+            text: 'A. 協助預約一般養護型機構，並告知家屬養護機構費用最便宜且可全額抵免醫療費',
+            correct: false
+          },
+          {
+            text: 'B. 李爺爺留置氣切管（3管）已超越養護機構法定門檻，應轉介至具高階技術護理之「護理之家」或「長期照護型機構」，並同步協助申請衛福部「住宿式服務機構使用者補助方案」（每年最高12萬元）以緩解財務重擔',
+            correct: true
+          },
+          {
+            text: 'C. 告知家屬長照法規規定凡有氣切管者一律不得入住任何長照住宿機構，必須永久自費住院治療',
+            correct: false
+          },
+          {
+            text: 'D. 安排李爺爺進住社區安養機構，白天再叫長照2.0居服員到機構幫忙抽痰換管',
+            correct: false
+          }
+        ],
+        lawBase: '《老人福利機構設立標準》+《護理人員法》+《住宿式機構補助要點》整合運用',
+        explanation: '【全方位解析】\n1. 管路限制判定：養護機構上限為2管且不含氣切；李爺爺有氣切（3管）且需抽痰，依法必須收住至「護理之家」或「長期照護型機構」。\n2. 政策補助串接：其失能等級第8級已符合4級以上標準，入住達標即可請領衛福部每年最高12萬元之住宿補助。\n3. 安養機構僅收自理長者；居服員亦不得在機構內執行技術性醫療抽痰，故選項B為唯一正確且專業之決策方案！'
+      }
+    ];
+
+    /* =========================================================
+       GAME STATE MANAGEMENT
+       ========================================================= */
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answeredRecords = []; // stores user choices and result
+    let currentSortedList = []; // for Q6 sort question
+
+    function startGame() {
+      playBeep(520, 0.1);
+      document.getElementById('startScreen').classList.add('hidden');
+      document.getElementById('resultScreen').classList.add('hidden');
+      document.getElementById('resultScreen').classList.remove('flex');
+      document.getElementById('gameScreen').classList.remove('hidden');
+      document.getElementById('gameScreen').classList.add('flex');
+
+      currentQuestionIndex = 0;
+      score = 0;
+      answeredRecords = [];
+      updateDashboard();
+      renderQuestion();
+    }
+
+    function restartGame() {
+      playBeep(440, 0.1);
+      startGame();
+    }
+
+    function updateDashboard() {
+      const q = QUESTIONS[currentQuestionIndex];
+      document.getElementById('questionIndexText').textContent = currentQuestionIndex + 1;
+      document.getElementById('scoreDisplay').textContent = score;
+
+      const progressPercent = ((currentQuestionIndex + 1) / QUESTIONS.length) * 100;
+      document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+      const levelBadge = document.getElementById('levelBadge');
+      levelBadge.className = `px-2.5 py-1 rounded-full text-xs font-bold ${q.stageColor}`;
+      levelBadge.textContent = q.stage;
+    }
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentQuestionIndex];
+      const topicTag = document.getElementById('topicTag');
+      const questionTitle = document.getElementById('questionTitle');
+      const questionIcon = document.getElementById('questionIcon');
+      const scenarioBox = document.getElementById('scenarioBox');
+      const optionsContainer = document.getElementById('optionsContainer');
+      const feedbackBox = document.getElementById('feedbackBox');
+      const sortControls = document.getElementById('sortControls');
+
+      // Reset feedback box
+      feedbackBox.classList.add('hidden');
+      feedbackBox.className = "hidden mt-6 p-4 md:p-5 rounded-2xl border transition-all duration-300";
+
+      topicTag.textContent = q.topic;
+      questionTitle.textContent = q.title;
+      questionIcon.textContent = q.icon;
+
+      if (q.scenario) {
+        scenarioBox.innerHTML = q.scenario.replace(/\n/g, '<br>');
+        scenarioBox.classList.remove('hidden');
+      } else {
+        scenarioBox.classList.add('hidden');
+      }
+
+      optionsContainer.innerHTML = '';
+
+      if (q.type === 'single') {
+        sortControls.classList.add('hidden');
+        renderSingleChoice(q);
+      } else if (q.type === 'sort') {
+        sortControls.classList.remove('hidden');
+        renderSortableList(q);
+      }
+    }
+
+    function renderSingleChoice(q) {
+      const optionsContainer = document.getElementById('optionsContainer');
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `w-full text-left p-4 rounded-2xl border-2 border-slate-200/90 hover:border-brand-500 hover:bg-brand-50/50 active:scale-[0.99] transition-all text-slate-700 font-medium text-sm md:text-base flex items-start gap-3 option-btn`;
+        btn.innerHTML = `
+          <span class="w-6 h-6 rounded-full bg-slate-100 text-slate-700 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 border border-slate-300">${String.fromCharCode(65 + idx)}</span>
+          <span class="flex-grow">${opt.text}</span>
+        `;
+        btn.onclick = () => selectSingleAnswer(idx, q);
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function selectSingleAnswer(selectedIndex, q) {
+      const buttons = document.querySelectorAll('.option-btn');
+      buttons.forEach(b => {
+        b.disabled = true;
+        b.classList.remove('hover:border-brand-500', 'hover:bg-brand-50/50');
+      });
+
+      const chosenOption = q.options[selectedIndex];
+      const isCorrect = chosenOption.correct;
+
+      if (isCorrect) {
+        score += 100;
+        playCorrectSound();
+        buttons[selectedIndex].classList.remove('border-slate-200/90');
+        buttons[selectedIndex].classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900', 'font-bold');
+      } else {
+        playWrongSound();
+        buttons[selectedIndex].classList.remove('border-slate-200/90');
+        buttons[selectedIndex].classList.add('border-rose-400', 'bg-rose-50', 'text-rose-900');
+        // Highlight the true correct option
+        q.options.forEach((opt, idx) => {
+          if (opt.correct) {
+            buttons[idx].classList.remove('border-slate-200/90');
+            buttons[idx].classList.add('border-emerald-500', 'bg-emerald-50/70', 'text-emerald-900');
+          }
+        });
+      }
+
+      document.getElementById('scoreDisplay').textContent = score;
+
+      // Save record for result notebook
+      answeredRecords.push({
+        questionIndex: currentQuestionIndex,
+        isCorrect: isCorrect,
+        userChoice: chosenOption.text,
+        lawBase: q.lawBase,
+        explanation: q.explanation,
+        title: q.title
+      });
+
+      showFeedback(isCorrect, q);
+    }
+
+    function renderSortableList(q) {
+      if (currentSortedList.length === 0 || currentSortedList.length !== q.items.length) {
+        currentSortedList = [...q.items];
+      }
+      renderSortDOM();
+    }
+
+    function renderSortDOM() {
+      const optionsContainer = document.getElementById('optionsContainer');
+      optionsContainer.innerHTML = '';
+
+      currentSortedList.forEach((itemText, idx) => {
+        const row = document.createElement('div');
+        row.className = "p-3.5 bg-slate-50 border-2 border-slate-200 rounded-2xl flex items-center justify-between gap-3 text-xs md:text-sm font-medium text-slate-800 transition-all";
+
+        row.innerHTML = `
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-amber-500 text-white font-black text-xs flex items-center justify-center shrink-0 shadow-sm">${idx + 1}</span>
+            <span>${itemText}</span>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button onclick="moveSortItem(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-600 font-bold hover:bg-slate-100 disabled:opacity-30 disabled:pointer-events-none active:scale-90 flex items-center justify-center text-xs" title="上移">
+              ▲
+            </button>
+            <button onclick="moveSortItem(${idx}, 1)" ${idx === currentSortedList.length - 1 ? 'disabled' : ''} class="w-8 h-8 rounded-lg bg-white border border-slate-200 text-slate-600 font-bold hover:bg-slate-100 disabled:opacity-30 disabled:pointer-events-none active:scale-90 flex items-center justify-center text-xs" title="下移">
+              ▼
+            </button>
+          </div>
+        `;
+        optionsContainer.appendChild(row);
+      });
+    }
+
+    function moveSortItem(index, offset) {
+      playBeep(480, 0.05);
+      const targetIndex = index + offset;
+      if (targetIndex < 0 || targetIndex >= currentSortedList.length) return;
+      const temp = currentSortedList[index];
+      currentSortedList[index] = currentSortedList[targetIndex];
+      currentSortedList[targetIndex] = temp;
+      renderSortDOM();
+    }
+
+    function resetSortOrder() {
+      playBeep(350, 0.05);
+      const q = QUESTIONS[currentQuestionIndex];
+      currentSortedList = [...q.items];
+      renderSortDOM();
+    }
+
+    function submitSortOrder() {
+      const q = QUESTIONS[currentQuestionIndex];
+      let matches = 0;
+      for (let i = 0; i < q.correctOrder.length; i++) {
+        if (currentSortedList[i] === q.correctOrder[i]) {
+          matches++;
+        }
+      }
+
+      const isCorrect = matches === q.correctOrder.length;
+
+      // Lock buttons
+      document.getElementById('sortControls').classList.add('hidden');
+      const sortButtons = document.querySelectorAll('#optionsContainer button');
+      sortButtons.forEach(btn => btn.disabled = true);
+
+      if (isCorrect) {
+        score += 100;
+        playCorrectSound();
+      } else {
+        playWrongSound();
+      }
+
+      document.getElementById('scoreDisplay').textContent = score;
+
+      answeredRecords.push({
+        questionIndex: currentQuestionIndex,
+        isCorrect: isCorrect,
+        userChoice: currentSortedList.join(' ➔ '),
+        lawBase: q.lawBase,
+        explanation: q.explanation,
+        title: q.title
+      });
+
+      showFeedback(isCorrect, q);
+    }
+
+    function showFeedback(isCorrect, q) {
+      const feedbackBox = document.getElementById('feedbackBox');
+      const feedbackTitle = document.getElementById('feedbackTitle');
+      const feedbackDetail = document.getElementById('feedbackDetail');
+      const nextBtn = document.getElementById('nextBtn');
+
+      feedbackBox.classList.remove('hidden');
+
+      if (isCorrect) {
+        feedbackBox.classList.add('bg-emerald-50/90', 'border-emerald-300');
+        feedbackTitle.className = 'flex items-center gap-2 mb-2 font-bold text-base md:text-lg text-emerald-800';
+        feedbackTitle.innerHTML = `<span>🎉 答題完全正確！專業判斷精準！</span>`;
+      } else {
+        feedbackBox.classList.add('bg-rose-50/90', 'border-rose-300');
+        feedbackTitle.className = 'flex items-center gap-2 mb-2 font-bold text-base md:text-lg text-rose-800';
+        feedbackTitle.innerHTML = `<span>⚠️ 觀念需要留意！請見法規核心解析：</span>`;
+      }
+
+      feedbackDetail.innerHTML = `
+        <div class="bg-white/80 p-3 rounded-xl border border-slate-200/60 mb-2">
+          <span class="inline-block px-2 py-0.5 rounded text-xs font-bold bg-slate-100 text-slate-700 mb-1">法規與政策依據</span>
+          <p class="font-bold text-slate-800 text-xs md:text-sm">${q.lawBase}</p>
+        </div>
+        <p class="text-xs md:text-sm text-slate-700 leading-relaxed font-normal whitespace-pre-line">${q.explanation}</p>
+      `;
+
+      if (currentQuestionIndex === QUESTIONS.length - 1) {
+        nextBtn.innerHTML = `<span>查看通關總成績</span> <span>🏆</span>`;
+      } else {
+        nextBtn.innerHTML = `<span>前往下一題</span> <span>➔</span>`;
+      }
+
+      feedbackBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function nextQuestion() {
+      playBeep(520, 0.06);
+      currentQuestionIndex++;
+      if (currentQuestionIndex < QUESTIONS.length) {
+        currentSortedList = []; // reset sort cache
+        updateDashboard();
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function showResults() {
+      document.getElementById('gameScreen').classList.add('hidden');
+      document.getElementById('gameScreen').classList.remove('flex');
+      const resultScreen = document.getElementById('resultScreen');
+      resultScreen.classList.remove('hidden');
+      resultScreen.classList.add('flex');
+
+      const correctCount = answeredRecords.filter(r => r.isCorrect).length;
+      const accuracy = Math.round((correctCount / QUESTIONS.length) * 100);
+
+      document.getElementById('finalScore').textContent = score;
+      document.getElementById('correctCount').textContent = `${correctCount} / ${QUESTIONS.length}`;
+      document.getElementById('accuracyRate').textContent = `${accuracy}%`;
+
+      const resultTrophy = document.getElementById('resultTrophy');
+      const resultBadge = document.getElementById('resultBadge');
+      const resultTitle = document.getElementById('resultTitle');
+      const resultComment = document.getElementById('resultComment');
+
+      if (accuracy >= 88) {
+        playVictorySound();
+        resultTrophy.textContent = '🌟';
+        resultBadge.className = 'inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 bg-amber-100 text-amber-800';
+        resultBadge.textContent = '長照專家守護者 • 滿星認證';
+        resultTitle.textContent = '太厲害了！專業法規完全掌握！';
+        resultComment.textContent = '您對機構分類、管路門檻、人力比配置與最新住宿補助法規具備精準實務決策力，足堪臨床照護專員與專業社工榜樣！';
+      } else if (accuracy >= 66) {
+        playBeep(650, 0.2);
+        resultTrophy.textContent = '👍';
+        resultBadge.className = 'inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 bg-sky-100 text-sky-800';
+        resultBadge.textContent = '合格長照實務人員';
+        resultTitle.textContent = '表現優良，基礎紮實！';
+        resultComment.textContent = '您已具備良好的機構照護核心知識，請特別複習下方管路限制與人力法規重點，實務上將更得心應手。';
+      } else {
+        playWrongSound();
+        resultTrophy.textContent = '📖';
+        resultBadge.className = 'inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 bg-rose-100 text-rose-800';
+        resultBadge.textContent = '待加強複習 • 考前衝刺';
+        resultTitle.textContent = '仍有部分核心法規需要精進！';
+        resultComment.textContent = '長照機構設立標準與衛政補助涉及嚴格法律條款，建議仔細閱讀下方錯題筆記，再次發起挑戰！';
+      }
+
+      // Populate review notebook
+      const reviewContainer = document.getElementById('reviewContainer');
+      const reviewSubtitle = document.getElementById('reviewSubtitle');
+      reviewContainer.innerHTML = '';
+
+      const mistakes = answeredRecords.filter(r => !r.isCorrect);
+
+      if (mistakes.length === 0) {
+        reviewSubtitle.textContent = '全對無錯題';
+        reviewContainer.innerHTML = `
+          <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-center">
+            <span class="text-2xl">🎉</span>
+            <p class="font-bold text-emerald-800 text-sm mt-1">完美通關！所有題目皆正確無誤！</p>
+            <p class="text-xs text-emerald-600 mt-0.5">您對機構照顧實務方案法規已瞭若指掌。</p>
+          </div>
+        `;
+      } else {
+        reviewSubtitle.textContent = `共 ${mistakes.length} 題需複習`;
+        mistakes.forEach(m => {
+          const card = document.createElement('div');
+          card.className = 'p-3.5 bg-slate-50 border border-slate-200 rounded-2xl space-y-1.5 text-xs';
+          card.innerHTML = `
+            <div class="flex items-center gap-1.5 text-rose-700 font-bold">
+              <span>❌</span>
+              <span class="line-clamp-1">${m.title}</span>
+            </div>
+            <div class="text-slate-500 font-medium"><span class="font-semibold text-slate-700">法定規範：</span>${m.lawBase}</div>
+            <div class="text-slate-600 bg-white p-2.5 rounded-xl border border-slate-100 leading-relaxed font-normal whitespace-pre-line">${m.explanation}</div>
+          `;
+          reviewContainer.appendChild(card);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
